@@ -54,6 +54,9 @@ link_config "tmux/tmux.conf" ".tmux.conf"
 # gitmux
 link_config "gitmux/gitmux.conf" ".gitmux.conf"
 
+# Starship
+link_config "starship/starship.toml" ".config/starship.toml"
+
 # nvim (linking the whole directory)
 link_config "nvim" ".config/nvim"
 

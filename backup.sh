@@ -31,6 +31,13 @@ mkdir -p "$REPO_ROOT/gitmux"
 cp -f ~/.gitmux.conf "$REPO_ROOT/gitmux/gitmux.conf"
 echo "Backed up gitmux.conf"
 
+# --- Starship ---
+# Ensure the target directory exists
+mkdir -p "$REPO_ROOT/starship"
+# Copy the file
+cp -f ~/.config/starship.toml "$REPO_ROOT/starship/starship.toml"
+echo "Backed up starship.toml"
+
 # --- nvim ---
 # Ensure the target directory exists
 mkdir -p "$REPO_ROOT/nvim"
