@@ -19,3 +19,16 @@ vim.keymap.set("t", "jj", "<C-\\><C-n>", {
 
 -- Fix for the End key being interpreted as <Select>
 vim.keymap.set({ "n", "v", "i" }, "<Select>", "<End>", { noremap = true })
+
+-- Move selected lines up/down in Visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {
+  desc = "Move selection down",
+  noremap = true,
+  silent = true,
+})
+
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
+  desc = "Move selection up",
+  noremap = true,
+  silent = true,
+})
