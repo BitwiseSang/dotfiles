@@ -5,17 +5,15 @@ return {
     "LiveServerStop",
     "LiveServerStartCustom",
   },
-  config = true,
-  -- Add the 'keys' table for your keymaps
+  opts = {},
   keys = {
     {
-      "<leader>cp", -- <leader>s then 's'
+      "<leader>cp",
       "<cmd>LiveServerStart<CR>",
       desc = "Start Live Server",
     },
-    -- 3. Define the keymap for stopping the server
     {
-      "<leader>cq", -- <leader>s then 'q' (for quit/stop)
+      "<leader>cq",
       "<cmd>LiveServerStop<CR>",
       desc = "Stop Live Server",
     },
