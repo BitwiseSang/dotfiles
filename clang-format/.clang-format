@@ -1,0 +1,35 @@
+Language:        Cpp
+# Google implies a lot of sensible defaults for large teams
+BasedOnStyle:    Google
+
+# 4-space indentation
+IndentWidth:     4
+TabWidth:        4
+UseTab:          Never
+
+# Align 'public:', 'private:', etc. with the class definition
+AccessModifierOffset: -4
+
+# Standard line length for modern screens (Google default is 80, which is too short)
+ColumnLimit:     100
+
+# Arguments usually go on the next line if they don't fit
+BinPackArguments: false
+BinPackParameters: false
+
+# Keep include blocks sorted (essential for large teams to avoid merge conflicts)
+SortIncludes:    true
+
+# Always attach braces to the function/class name (K&R / One True Brace Style)
+BreakBeforeBraces: Attach
+
+# Exception: If a function is empty, keep it on one line (e.g., destructors)
+AllowShortFunctionsOnASingleLine: Empty
+
+# Pointer alignment: "int* a" vs "int *a". 
+# Left is cleaner for types, Right is traditional C.
+# "Left" is increasingly popular in modern C++ (the type is int-pointer)
+PointerAlignment: Left
+
+# Spaces before parentheses in control statements (if, for, while)
+SpaceBeforeParens: ControlStatements
