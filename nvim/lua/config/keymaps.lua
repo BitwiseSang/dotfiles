@@ -32,3 +32,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
   noremap = true,
   silent = true,
 })
+
+-- Compile C++ with F9
+vim.keymap.set("n", "<F9>", ":!g++ -g % -o %:r<CR>", { desc = "Compile C++" })
