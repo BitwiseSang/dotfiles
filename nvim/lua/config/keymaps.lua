@@ -34,4 +34,22 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
 })
 
 -- Compile C++ with F9
-vim.keymap.set("n", "<F9>", ":!g++ -g % -o %:r<CR>", { desc = "Compile C++" })
+vim.keymap.set("n", "<F9>", "<cmd>w<cr><cmd>make<cr>", { desc = "Build C++ File" })
+
+-- F5: Build & Run (The "God Key")
+vim.keymap.set("n", "<F5>", function()
+  vim.cmd("w") -- 1. Save the file
+  vim.cmd("make") -- 2. Run the compiler (your autocmd handles the error window)
+
+  -- 3. If compile succeeded (exit code 0), run the program
+  if vim.v.shell_error == 0 then
+    local file = vim.fn.expand("%:r") -- Get filename without extension
+    vim.cmd("vsplit | term " .. file) -- Open terminal in split
+  end
+end, { desc = "Build and Run C++" })
+
+-- F10: Run Only (Skip compilation)
+vim.keymap.set("n", "<F10>", function()
+  local file = vim.fn.expand("%:r")
+  vim.cmd("vsplit | term " .. file)
+end, { desc = "Run Compiled C++ File" })
