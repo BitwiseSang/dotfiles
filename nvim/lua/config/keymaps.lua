@@ -53,3 +53,27 @@ vim.keymap.set("n", "<F10>", function()
   local file = vim.fn.expand("%:r")
   vim.cmd("vsplit | term " .. file)
 end, { desc = "Run Compiled C++ File" })
+
+-- Toggle checkboxes in markdown files
+vim.keymap.set("n", "<leader>tm", function()
+  local line = vim.api.nvim_get_current_line()
+  local new_line = line -- Default to original line if no match found
+
+  if line:match("^%s*-%s%[ %]") then
+    -- Capture indentation (%s*) and use %1 to restore it
+    new_line = line:gsub("^(%s*)- %[ %]", "%1- [x]")
+  elseif line:match("^%s*-%s%[x%]") then
+    -- Capture indentation (%s*) and use %1 to restore it
+    new_line = line:gsub("^(%s*)- %[x%]", "%1- [ ]")
+  else
+    -- Optional: Add a checkbox if one doesn't exist
+    -- This checks if it's a list item first to avoid double hyphens
+    if line:match("^%s*-%s") then
+      new_line = line:gsub("^(%s*)- ", "%1- [ ] ")
+    else
+      new_line = line:gsub("^(%s*)", "%1- [ ] ")
+    end
+  end
+
+  vim.api.nvim_set_current_line(new_line)
+end, { desc = "Toggle Markdown Checkbox" })
