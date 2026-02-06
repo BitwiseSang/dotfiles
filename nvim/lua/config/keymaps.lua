@@ -9,7 +9,7 @@ vim.keymap.set("i", "jj", "<Esc>", {
   silent = true, -- Execute silently
 })
 
--- Map 'jj' to Escape in Insert mode in the termimal
+-- Map 'jj' and 'JJ' to Escape in Insert mode in the termimal
 
 vim.keymap.set("t", "jj", "<C-\\><C-n>", {
   desc = "Exit Terminal mode with jj",

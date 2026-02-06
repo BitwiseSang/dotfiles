@@ -2,12 +2,18 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
-      rubocop = {
-        -- Overriding the default command to use 'bundle exec'
-        cmd = { "bundle", "exec", "rubocop", "--lsp" },
-        -- Optional: ensure it runs only if a Gemfile is found
-        root_dir = require("lspconfig.util").root_pattern("Gemfile", ".git"),
+      ruby_lsp = {
+        cmd = { "bundle", "exec", "ruby-lsp" }, -- Ensure it runs in bundle context
+        init_options = {
+          formatter = "auto",
+          linters = { "rubocop" },
+        },
       },
+    },
+    setup = {
+      rubocop = function()
+        return true -- returning true disables the setup for this server
+      end,
     },
   },
 }
