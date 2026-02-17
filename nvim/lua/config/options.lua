@@ -18,3 +18,6 @@ vim.opt.textwidth = 80
 -- 't' = auto-wrap text using 'textwidth'
 -- 'c' = auto-wrap comments using 'textwidth'
 vim.opt.formatoptions:append("t")
+
+-- LSP Server to use for Rust
+vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
