@@ -1,35 +1,135 @@
-Language:        Cpp
-# Google implies a lot of sensible defaults for large teams
-BasedOnStyle:    Google
+Language: Cpp
+# Google provides sensible large-team defaults. Overrides below are explicit
+# and intentional — see comments for rationale.
+BasedOnStyle: Google
 
-# 4-space indentation
-IndentWidth:     4
-TabWidth:        4
-UseTab:          Never
+# ── C++ Standard ──────────────────────────────────────────────────────────────
 
-# Align 'public:', 'private:', etc. with the class definition
+# Declare the standard explicitly so clang-format can reason about syntax.
+# Update to Latest once your team fully adopts C++23.
+Standard: c++20
+
+# ── Indentation ───────────────────────────────────────────────────────────────
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Counteracts IndentWidth so 'public:'/'private:' align with the class brace.
+# Must equal -IndentWidth.
 AccessModifierOffset: -4
 
-# Standard line length for modern screens (Google default is 80, which is too short)
-ColumnLimit:     100
+# Indent the contents of a namespace to distinguish nested scopes visually.
+NamespaceIndentation: Inner
 
-# Arguments usually go on the next line if they don't fit
-BinPackArguments: false
-BinPackParameters: false
+# ── Line Length ───────────────────────────────────────────────────────────────
 
-# Keep include blocks sorted (essential for large teams to avoid merge conflicts)
-SortIncludes:    true
+# 80 (Google default) is too narrow for modern monitors and leads to
+# excessive wrapping. 100 is a widely adopted compromise.
+ColumnLimit: 100
 
-# Always attach braces to the function/class name (K&R / One True Brace Style)
+# ── Braces ────────────────────────────────────────────────────────────────────
+
+# K&R / Attach style — opening brace on same line as declaration.
+# Explicit here even though Google defaults to Attach, for documentation clarity.
 BreakBeforeBraces: Attach
 
-# Exception: If a function is empty, keep it on one line (e.g., destructors)
-AllowShortFunctionsOnASingleLine: Empty
+# Braced init lists (C++11): compact style, no space inside braces.
+# e.g., std::vector<int>{1, 2, 3}  not  std::vector<int>{ 1, 2, 3 }
+Cpp11BracedListStyle: true
 
-# Pointer alignment: "int* a" vs "int *a". 
-# Left is cleaner for types, Right is traditional C.
-# "Left" is increasingly popular in modern C++ (the type is int-pointer)
+# ── Short Constructs ──────────────────────────────────────────────────────────
+
+# Allow empty AND inline single-line functions (accessors, trivial wrappers).
+# e.g., int x() const { return x_; }
+# 'Inline' = only inside class bodies, not top-level definitions.
+AllowShortFunctionsOnASingleLine: Inline
+
+# Do NOT allow short if-statements on one line. Single-line ifs are a common
+# source of bugs when people add a second statement without adding braces.
+AllowShortIfStatementsOnASingleLine: Never
+
+# Keep short lambdas on one line when they fit — common in STL algorithm calls.
+AllowShortLambdasOnASingleLine: Inline
+
+# ── Function Arguments & Parameters ───────────────────────────────────────────
+
+# If arguments/parameters don't fit on one line, put each on its own line.
+# Prevents the "hanging indent" look of bin-packed arguments.
+BinPackArguments: false
+BinPackParameters: OnePerLine
+
+# Align continuation of arguments with the opening parenthesis.
+# e.g.:
+#   void foo(int aaaaaa,
+#            int bbbbbb);
+AlignAfterOpenBracket: Align
+
+# ── Constructor Initializers ───────────────────────────────────────────────────
+
+# Prefer packing initializers on one line if they fit; break to one-per-line
+# if they don't. Avoids the ugly "first initializer on same line as colon" look.
+PackConstructorInitializers: CurrentLine
+
+# When breaking, put the colon and each initializer on its own line.
+# e.g.:
+#   Foo::Foo()
+#       : bar_(1),
+#         baz_(2) {}
+BreakConstructorInitializers: BeforeColon
+
+# Indent initializer list by 4 spaces (matches IndentWidth).
+ConstructorInitializerIndentWidth: 4
+
+# ── Includes ──────────────────────────────────────────────────────────────────
+
+# 'SortIncludes: true' is deprecated. Use CaseSensitive for deterministic,
+# case-aware ordering that avoids platform-specific include surprises.
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
+
+# Regroup includes into blocks separated by blank lines instead of merging
+# everything into one block. Combined with .clang-format include categories
+# (define per-project), this enforces: own header → C stdlib → C++ stdlib → third-party → project.
+IncludeBlocks: Regroup
+
+# ── Pointers & References ─────────────────────────────────────────────────────
+
+# 'int* p' not 'int *p'. The type is "pointer to int"; the asterisk belongs
+# with the type. Consistent with modern C++ Core Guidelines.
 PointerAlignment: Left
+ReferenceAlignment: Left
 
-# Spaces before parentheses in control statements (if, for, while)
+# ── Spaces ────────────────────────────────────────────────────────────────────
+
+# Add a space before '(' in control flow statements (if, for, while, switch).
+# Does NOT add spaces before function call parentheses.
 SpaceBeforeParens: ControlStatements
+
+# No space between template angle brackets at end: 'map<int, vector<int>>'
+SpacesInAngles: Never
+
+# ── Class Layout ──────────────────────────────────────────────────────────────
+
+# Require one blank line before access modifiers (public/private/protected),
+# except when the modifier is the first line in the class body.
+EmptyLineBeforeAccessModifier: LogicalBlock
+
+# Do NOT add a blank line after the access modifier — it wastes vertical space.
+EmptyLineAfterAccessModifier: Never
+
+# ── Blank Lines & Separation ──────────────────────────────────────────────────
+
+# Insert a blank line between top-level definitions (functions, classes).
+# Reduces visual noise from definitions running together.
+SeparateDefinitionBlocks: Leave
+
+# Maximum consecutive blank lines allowed — prevents excessive whitespace.
+MaxEmptyLinesToKeep: 1
+
+# ── Trailing Commas ───────────────────────────────────────────────────────────
+
+# Insert trailing commas in multi-line function parameter lists.
+# Makes future diffs cleaner (adding a parameter = 1-line diff, not 2).
+InsertTrailingCommas: Wrapped
