@@ -57,6 +57,12 @@ link_config "gitmux/gitmux.conf" ".gitmux.conf"
 # Starship
 link_config "starship/starship.toml" ".config/starship.toml"
 
+# Clang format
+link_config "clang-format/.clang-format" ".clang-format"
+
+# Clang format
+link_config "aria2/aria2.conf" "aria2.conf"
+
 # nvim (linking the whole directory)
 link_config "nvim" ".config/nvim"
 
