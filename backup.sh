@@ -5,17 +5,17 @@ set -e
 echo "Starting config backup..."
 
 # Get the absolute path to the directory where this script is located (the repo root)
-REPO_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+REPO_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 echo "Repo root found at: $REPO_ROOT"
 echo "Copying local configs into repo..."
 
-# --- Alacritty ---
+# --- ghostty ---
 # Ensure the target directory exists
-mkdir -p "$REPO_ROOT/alacritty"
+mkdir -p "$REPO_ROOT/ghostty"
 # Copy the file
-cp -f ~/.config/alacritty/alacritty.toml "$REPO_ROOT/alacritty/alacritty.toml"
-echo "Backed up alacritty.toml"
+cp -f ~/.config/ghostty/config.ghostty "$REPO_ROOT/ghostty/config.ghostty"
+echo "Backed up config.ghostty"
 
 # --- tmux ---
 # Ensure the target directory exists
@@ -48,7 +48,6 @@ echo "Syncing nvim configs..."
 rsync -a --delete ~/.config/nvim/ "$REPO_ROOT/nvim/"
 echo "Nvim sync complete."
 
-
 echo "Files copied. Committing to git..."
 
 # Navigate to the repo directory to run git commands
@@ -56,8 +55,8 @@ cd "$REPO_ROOT"
 
 # Check if there are any changes to commit
 if [[ -z $(git status --porcelain) ]]; then
-    echo "No changes detected. Backup complete."
-    exit 0
+  echo "No changes detected. Backup complete."
+  exit 0
 fi
 
 # Get metadata for commit message
