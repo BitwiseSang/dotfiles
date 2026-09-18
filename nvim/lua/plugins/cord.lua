@@ -1,9 +1,9 @@
 return {
   "vyfor/cord.nvim",
   event = "VeryLazy",
-  opts = {
-    -- Add your custom cord configuration options here, e.g.:
-    -- timer = { interval = 1500 },
-    -- text = { workspace = function(opts) return "In " .. opts.workspace end },
-  },
+  -- Only activate when Discord is actually running (avoids a background process per tmux pane)
+  cond = function()
+    return vim.fn.glob("/tmp/discord-ipc-*") ~= ""
+  end,
+  opts = {},
 }

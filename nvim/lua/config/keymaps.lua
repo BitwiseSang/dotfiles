@@ -33,27 +33,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {
   silent = true,
 })
 
--- Compile C++ with F9
-vim.keymap.set("n", "<F9>", "<cmd>w<cr><cmd>make<cr>", { desc = "Build C++ File" })
-
--- F5: Build & Run (The "God Key")
-vim.keymap.set("n", "<F5>", function()
-  vim.cmd("w") -- 1. Save the file
-  vim.cmd("make") -- 2. Run the compiler (your autocmd handles the error window)
-
-  -- 3. If compile succeeded (exit code 0), run the program
-  if vim.v.shell_error == 0 then
-    local file = vim.fn.expand("%:r") -- Get filename without extension
-    vim.cmd("vsplit | term " .. file) -- Open terminal in split
-  end
-end, { desc = "Build and Run C++" })
-
--- F10: Run Only (Skip compilation)
-vim.keymap.set("n", "<F10>", function()
-  local file = vim.fn.expand("%:r")
-  vim.cmd("vsplit | term " .. file)
-end, { desc = "Run Compiled C++ File" })
-
 -- Toggle checkboxes in markdown files
 vim.keymap.set("n", "<leader>tm", function()
   local line = vim.api.nvim_get_current_line()
@@ -77,3 +56,21 @@ vim.keymap.set("n", "<leader>tm", function()
 
   vim.api.nvim_set_current_line(new_line)
 end, { desc = "Toggle Markdown Checkbox" })
+
+-- Update/insert a Markdown table-of-contents using the installed markdown-toc binary.
+-- Requires a <!-- toc --> comment in the file to know where to insert the TOC.
+vim.keymap.set("n", "<leader>tc", function()
+  local file = vim.fn.expand("%:p")
+  if vim.bo.filetype ~= "markdown" then
+    vim.notify("markdown-toc: not a markdown file", vim.log.levels.WARN)
+    return
+  end
+  vim.cmd("write")
+  local result = vim.fn.system("markdown-toc -i " .. vim.fn.shellescape(file))
+  if vim.v.shell_error ~= 0 then
+    vim.notify("markdown-toc failed:\n" .. result, vim.log.levels.ERROR)
+    return
+  end
+  vim.cmd("edit!")
+  vim.notify("TOC updated", vim.log.levels.INFO)
+end, { desc = "Update Markdown TOC" })

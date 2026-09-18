@@ -46,9 +46,9 @@ link_config() {
 # --- Link Configurations ---
 
 # Ghostty
-link_config "ghostty/config.ghostty" ".config/ghostty/config.ghostty"
+link_config "ghostty/config.ghostty" ".config/ghostty/config"
 
-# Ghostty
+# Kitty
 link_config "kitty/kitty.conf" ".config/kitty/kitty.conf"
 
 # tmux
@@ -60,13 +60,13 @@ link_config "starship/starship.toml" ".config/starship.toml"
 # Clang format
 link_config "clang-format/.clang-format" ".clang-format"
 
-# Clang format
-link_config "aria2/aria2.conf" "aria2.conf"
+# aria2
+link_config "aria2/aria2.conf" ".config/aria2/aria2.conf"
 
 # nvim (linking the whole directory)
 link_config "nvim" ".config/nvim"
 
-# nvim (linking the whole directory)
+# fish (linking the whole directory)
 link_config "fish" ".config/fish"
 
 echo ""

@@ -10,57 +10,54 @@ REPO_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 echo "Repo root found at: $REPO_ROOT"
 echo "Copying local configs into repo..."
 
+# Helper to safely copy if file exists
+safe_copy() {
+  local src="$1"
+  local dest="$2"
+  if [ -f "$src" ]; then
+    mkdir -p "$(dirname "$dest")"
+    cp -f "$src" "$dest"
+    echo "Backed up $(basename "$dest")"
+  fi
+}
+
 # --- ghostty ---
-# Ensure the target directory exists
-mkdir -p "$REPO_ROOT/ghostty"
-# Copy the file
-cp -f ~/.config/ghostty/config.ghostty "$REPO_ROOT/ghostty/config.ghostty"
-echo "Backed up config.ghostty"
+if [ -f ~/.config/ghostty/config ]; then
+  safe_copy ~/.config/ghostty/config "$REPO_ROOT/ghostty/config.ghostty"
+elif [ -f ~/.config/ghostty/config.ghostty ]; then
+  safe_copy ~/.config/ghostty/config.ghostty "$REPO_ROOT/ghostty/config.ghostty"
+fi
 
 # --- kitty ---
-# Ensure the target directory exists
-mkdir -p "$REPO_ROOT/kitty"
-# Copy the file
-cp -f ~/.config/kitty/kitty.conf "$REPO_ROOT/kitty/kitty.conf"
-echo "Backed up kitty.conf"
+safe_copy ~/.config/kitty/kitty.conf "$REPO_ROOT/kitty/kitty.conf"
 
 # --- tmux ---
-# Ensure the target directory exists
-mkdir -p "$REPO_ROOT/tmux"
-# Copy the file
-cp -f ~/.tmux.conf "$REPO_ROOT/tmux/tmux.conf"
-echo "Backed up tmux.conf"
+safe_copy ~/.tmux.conf "$REPO_ROOT/tmux/tmux.conf"
 
 # --- gitmux ---
-# Ensure the target directory exists
-mkdir -p "$REPO_ROOT/gitmux"
-# Copy the file
-cp -f ~/.gitmux.conf "$REPO_ROOT/gitmux/gitmux.conf"
-echo "Backed up gitmux.conf"
+safe_copy ~/.gitmux.conf "$REPO_ROOT/gitmux/gitmux.conf"
 
-# --- Starship ---
-# Ensure the target directory exists
-mkdir -p "$REPO_ROOT/starship"
-# Copy the file
-cp -f ~/.config/starship.toml "$REPO_ROOT/starship/starship.toml"
-echo "Backed up starship.toml"
+# --- starship ---
+safe_copy ~/.config/starship.toml "$REPO_ROOT/starship/starship.toml"
+
+# --- clang-format ---
+safe_copy ~/.clang-format "$REPO_ROOT/clang-format/.clang-format"
+
+# --- aria2 ---
+if [ -f ~/.config/aria2/aria2.conf ]; then
+  safe_copy ~/.config/aria2/aria2.conf "$REPO_ROOT/aria2/aria2.conf"
+elif [ -f ~/aria2.conf ]; then
+  safe_copy ~/aria2.conf "$REPO_ROOT/aria2/aria2.conf"
+fi
 
 # --- nvim ---
-# Ensure the target directory exists
 mkdir -p "$REPO_ROOT/nvim"
-# Use rsync to sync the contents of your nvim config into the repo's nvim dir
-# -a: archive mode (recursive, preserves permissions, etc.)
-# --delete: deletes files in the repo's nvim/ dir that are NO longer in your local ~/.config/nvim/
 echo "Syncing nvim configs..."
 rsync -a --delete ~/.config/nvim/ "$REPO_ROOT/nvim/"
 echo "Nvim sync complete."
 
-# --- nvim ---
-# Ensure the target directory exists
+# --- fish ---
 mkdir -p "$REPO_ROOT/fish"
-# Use rsync to sync the contents of your nvim config into the repo's nvim dir
-# -a: archive mode (recursive, preserves permissions, etc.)
-# --delete: deletes files in the repo's nvim/ dir that are NO longer in your local ~/.config/nvim/
 echo "Syncing fish configs..."
 rsync -a --delete ~/.config/fish/ "$REPO_ROOT/fish/"
 echo "Fish sync complete."

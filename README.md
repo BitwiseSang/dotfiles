@@ -1,46 +1,37 @@
-# My Dotfiles
+# Dotfiles
 
-A simple repository to store and manage my personal configuration files.
+Personal configuration files for Linux terminal workflows, tuned for performance and accessibility.
 
-## Contents
+## Components
 
-This repository contains my personal configurations for the following tools:
+- **`nvim/`**: Neovim configuration based on LazyVim. Includes LSP support, debugging (DAP), testing (Neotest for Vitest, RSpec, pytest), symbol outlines (Aerial), git diffs (Diffview), and system clipboard integration.
+- **`tmux/`**: Tmux configuration with Catppuccin Mocha theme, true color and undercurl support, and seamless `Ctrl+h/j/k/l` pane navigation shared with Neovim.
+- **`kitty/`**: Kitty terminal configuration with Fira Code and Nerd Font glyph mapping.
+- **`ghostty/`**: Ghostty terminal configuration.
+- **`fish/`**: Fish shell configuration integrated with Starship, mise, fnm, and zoxide.
+- **`starship/`**: Starship prompt configuration.
+- **`clang-format/`**: Formatting rules for C and C++.
+- **`aria2/`**: Configuration for the aria2 download utility.
 
-- **`nvim/`**: Configs for Neovim.
-- **`tmux/`**: Configs for tmux.
-- **`starship/`**: Configs for starship prompt.
-- **`aria2/`**: Configs for aria2.
-- **`clang-format/`**: formatting options for clang-format.
+## Helper Scripts
 
-### Scripts
-
-- **`setup.sh`**: A script to install these dotfiles by creating
-  symbolic links on a new system.
-- **`backup.sh`**: A script to copy local, in-use configurations _back into_
-  this repository to be committed.
+- **`setup.sh`**: Creates symbolic links from this repository to your home directory, backing up any existing files first.
+- **`backup.sh`**: Copies active local configurations into this repository, creates a timestamped git commit, and pushes to remote.
 
 ## Installation
 
-**Warning**: These are my personal configs. Use at your own risk, or fork and
-adapt them for your own use.
-
-1. Clone the repository:
-
-```
-git@github.com:BitwiseSang/dotfiles.git
-```
-
-1. Make the script executable (if needed) and run it:
+Clone the repository and run the setup script:
 
 ```shell
+git clone git@github.com:BitwiseSang/dotfiles.git
+cd dotfiles
 chmod +x setup.sh && ./setup.sh
 ```
 
-## Backing Up Local Changes
+## Backing Up Changes
 
-When I make changes to my configs on my machine, I run the backup script to copy
-them into this repo before committing.
+To sync local configurations into the repository and push:
 
-1. Run the backup script: `./backup.sh`. This will backup your configs,
-   commit them, and push them.
-2. Enter your ssh key, if any, to push your changes.
+```shell
+chmod +x backup.sh && ./backup.sh
+```

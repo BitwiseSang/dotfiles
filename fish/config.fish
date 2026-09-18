@@ -6,7 +6,11 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 #    # smth smth
 #end
 starship init fish | source
-eval "$(~/.local/bin/mise activate)"
+
+# zoxide (smart cd)
+if type -q zoxide
+    zoxide init fish | source
+end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

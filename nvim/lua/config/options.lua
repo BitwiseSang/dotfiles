@@ -2,7 +2,11 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 vim.opt.signcolumn = "yes"
+vim.opt.clipboard = "unnamedplus" -- Sync yank register with system clipboard
 vim.opt.relativenumber = false
+
+-- Use box-drawing characters for split separators (cleaner with transparent bg)
+vim.opt.fillchars:append({ vert = "│", horiz = "─", eob = " " })
 
 -- Line wrapping configurations
 vim.opt.wrap = true

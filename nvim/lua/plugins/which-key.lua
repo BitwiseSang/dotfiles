@@ -2,11 +2,13 @@ return {
   {
     "folke/which-key.nvim",
     opts = function(_, opts)
-      -- Add the new group to the existing spec
       opts.spec = opts.spec or {}
       table.insert(opts.spec, {
-        mode = { "n", "v" }, -- Normal and Visual mode
-        { "<leader>t", group = "toggle" }, -- Assign name "toggle" to leader + t
+        mode = { "n", "v" },
+        -- <leader>t: "test" (neotest) — <leader>tm for markdown checkbox sits here too
+        { "<leader>t", group = "test" },
+        -- <leader>ce: aerial symbol outline (code → explore)
+        { "<leader>ce", group = "outline" },
       })
     end,
   },

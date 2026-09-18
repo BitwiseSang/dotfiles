@@ -2,6 +2,14 @@
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+
+-- WinSeparator: tint to Comment fg so split edges are visible against transparent bg
+do
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = "Comment", link = false })
+  if ok and hl and hl.fg then
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = hl.fg, bg = "none" })
+  end
+end
 vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
 vim.api.nvim_set_hl(0, "Terminal", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
@@ -10,22 +18,11 @@ vim.api.nvim_set_hl(0, "Folded", { bg = "none" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none" })
-vim.api.nvim_set_hl(0, "TelescopePromptTitle", { bg = "none" })
-
--- transparent background for neotree
 vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeVertSplit", { bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { bg = "none" })
 vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "none" })
-
--- transparent background for nvim-tree
-vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NvimTreeVertSplit", { bg = "none" })
-vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
 
 -- transparent notify background
 vim.api.nvim_set_hl(0, "NotifyINFOBody", { bg = "none" })
