@@ -36,21 +36,15 @@ return {
       for name, config in pairs(opts.adapters or {}) do
         local ok, adapter = pcall(require, name)
         if ok then
-          if type(config) == "table" and not vim.tbl_isempty(config) then
-            local meta = getmetatable(adapter)
-            if adapter.setup then
-              adapter.setup(config)
-            elseif adapter.adapter then
-              adapter.adapter(config)
-              adapter = adapter.adapter
-            elseif meta and meta.__call then
-              adapter = adapter(config)
-            end
-          else
-            local meta = getmetatable(adapter)
-            if meta and meta.__call then
-              adapter = adapter()
-            end
+          local adapter_opts = type(config) == "table" and config or {}
+          local meta = getmetatable(adapter)
+          if adapter.setup then
+            adapter.setup(adapter_opts)
+          elseif adapter.adapter then
+            adapter.adapter(adapter_opts)
+            adapter = adapter.adapter
+          elseif meta and meta.__call then
+            adapter = adapter(adapter_opts)
           end
           table.insert(adapters, adapter)
         end
