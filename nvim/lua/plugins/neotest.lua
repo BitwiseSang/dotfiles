@@ -28,6 +28,10 @@ return {
     opts = {
       status = { virtual_text = true },
       output = { open_on_run = true },
+      summary = {
+        -- Opens on the right and sets the width to 30 columns
+        open = "botright vsplit | vertical resize 30",
+      },
     },
     config = function(_, opts)
       -- Instantiate adapters: name → config table pattern
