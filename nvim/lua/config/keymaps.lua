@@ -3,19 +3,19 @@
 -- Add any additional keymaps here
 
 -- Map 'jj' to Escape in Insert mode
-vim.keymap.set("i", "jj", "<Esc>", {
-  desc = "Exit Insert mode with jj", -- Description for which-key (if installed)
-  noremap = true, -- Non-recursive mapping
-  silent = true, -- Execute silently
-})
+-- vim.keymap.set("i", "jj", "<Esc>", {
+--   desc = "Exit Insert mode with jj", -- Description for which-key (if installed)
+--   noremap = true, -- Non-recursive mapping
+--   silent = true, -- Execute silently
+-- })
 
 -- Map 'jj' and 'JJ' to Escape in Insert mode in the termimal
 
-vim.keymap.set("t", "jj", "<C-\\><C-n>", {
-  desc = "Exit Terminal mode with jj",
-  noremap = true,
-  silent = true,
-})
+-- vim.keymap.set("t", "jj", "<C-\\><C-n>", {
+--   desc = "Exit Terminal mode with jj",
+--   noremap = true,
+--   silent = true,
+-- })
 
 -- Fix for the End key being interpreted as <Select>
 vim.keymap.set({ "n", "v", "i" }, "<Select>", "<End>", { noremap = true })
