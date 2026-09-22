@@ -56,6 +56,12 @@ echo "Syncing nvim configs..."
 rsync -a --delete ~/.config/nvim/ "$REPO_ROOT/nvim/"
 echo "Nvim sync complete."
 
+# --- doom ---
+mkdir -p "$REPO_ROOT/doom"
+echo "Syncing doom configs..."
+rsync -a --delete ~/.config/doom/ "$REPO_ROOT/doom/"
+echo "Doom sync complete."
+
 # --- fish ---
 mkdir -p "$REPO_ROOT/fish"
 echo "Syncing fish configs..."

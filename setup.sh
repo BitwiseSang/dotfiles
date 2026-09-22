@@ -66,6 +66,9 @@ link_config "aria2/aria2.conf" ".config/aria2/aria2.conf"
 # nvim (linking the whole directory)
 link_config "nvim" ".config/nvim"
 
+# doom (linking the whole directory)
+link_config "doom" ".config/doom"
+
 # fish (linking the whole directory)
 link_config "fish" ".config/fish"
 
