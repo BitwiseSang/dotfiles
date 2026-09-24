@@ -5,6 +5,11 @@ vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus" -- Sync yank register with system clipboard
 vim.opt.relativenumber = true
 
+vim.opt.cmdheight = 1
+
+-- Enables a popup menu and fuzzy matching for command line completion
+vim.opt.wildoptions = "pum,fuzzy"
+
 -- Use box-drawing characters for split separators (cleaner with transparent bg)
 vim.opt.fillchars:append({ vert = "│", horiz = "─", eob = " " })
 
