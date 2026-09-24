@@ -21,8 +21,22 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 19))
+
+(custom-theme-set-faces!
+  'doom-one
+  '(org-level-8 :inherit outline-3 :height 1.0)
+  '(org-level-7 :inherit outline-3 :height 1.0)
+  '(org-level-6 :inherit outline-3 :height 1.1)
+  '(org-level-5 :inherit outline-3 :height 1.2)
+  '(org-level-4 :inherit outline-3 :height 1.3)
+  '(org-level-3 :inherit outline-3 :height 1.4)
+  '(org-level-2 :inherit outline-3 :height 1.5)
+  '(org-level-1 :inherit outline-3 :height 1.6)
+  '(org-document-title :height 1.8 :underline t :bold t)
+  )
+
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -43,12 +57,14 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-
+(setq org-modern-table-vertical 1)
+(setq org-modern-table t)
+(add-hook 'org-mode-hook #'hl-todo-mode)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
@@ -82,10 +98,26 @@
 ;; they are implemented.
 
 (setq shell-file-name (executable-find "bash"))
-(setq-default vterm-shell "/bin/fish")
-(setq-default explicit-shell-file-name "/bin/fish")
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 
-(setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'regular))
-(setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18)
-      doom-big-font (font-spec :family "Fira Code" :size 24))
+(map! :leader
+      :desc "Comment line" "-" #'comment-line)
+
+(setq confirm-kill-emacs nil)
+(setq initial-buffer-choice t)
+(setq initial-scratch-message "")
+
+;; indent bars customization
+(after! indent-bars
+  (setq indent-bars-prefer-character nil)
+  (setq indent-bars-treesit-support nil)
+  (setq indent-bars-highlight-current-depth nil)
+  (setq indent-bars-color-by-depth nil))
+
+;; enable soft wrap globally
+(global-visual-line-mode t)
+
+;; visual navigation through wrapped lines
+(map! :nv "j" #'evil-next-visual-line
+      :nv "k" #'evil-previous-visual-line)
