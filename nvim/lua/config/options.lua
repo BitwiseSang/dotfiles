@@ -3,7 +3,7 @@
 -- Add any additional options here
 vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus" -- Sync yank register with system clipboard
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 -- Use box-drawing characters for split separators (cleaner with transparent bg)
 vim.opt.fillchars:append({ vert = "│", horiz = "─", eob = " " })
