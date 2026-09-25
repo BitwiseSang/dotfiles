@@ -54,9 +54,6 @@ link_config "kitty/kitty.conf" ".config/kitty/kitty.conf"
 # tmux
 link_config "tmux/tmux.conf" ".tmux.conf"
 
-# Starship
-link_config "starship/starship.toml" ".config/starship.toml"
-
 # Clang format
 link_config "clang-format/.clang-format" ".clang-format"
 

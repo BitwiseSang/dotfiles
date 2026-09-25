@@ -8,8 +8,7 @@ Personal configuration files for Linux terminal workflows, tuned for performance
 - **`tmux/`**: Tmux configuration with Catppuccin Mocha theme, true color and undercurl support, and seamless `Ctrl+h/j/k/l` pane navigation shared with Neovim.
 - **`kitty/`**: Kitty terminal configuration with Fira Code and Nerd Font glyph mapping.
 - **`ghostty/`**: Ghostty terminal configuration.
-- **`fish/`**: Fish shell configuration integrated with Starship, mise, fnm, and zoxide.
-- **`starship/`**: Starship prompt configuration.
+- **`fish/`**: Fish shell configuration integrated with hydro, mise, fnm, and zoxide.
 - **`clang-format/`**: Formatting rules for C and C++.
 - **`aria2/`**: Configuration for the aria2 download utility.
 

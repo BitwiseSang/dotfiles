@@ -34,12 +34,6 @@ safe_copy ~/.config/kitty/kitty.conf "$REPO_ROOT/kitty/kitty.conf"
 # --- tmux ---
 safe_copy ~/.tmux.conf "$REPO_ROOT/tmux/tmux.conf"
 
-# --- gitmux ---
-safe_copy ~/.gitmux.conf "$REPO_ROOT/gitmux/gitmux.conf"
-
-# --- starship ---
-safe_copy ~/.config/starship.toml "$REPO_ROOT/starship/starship.toml"
-
 # --- clang-format ---
 safe_copy ~/.clang-format "$REPO_ROOT/clang-format/.clang-format"
 
