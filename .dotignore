@@ -1,8 +1,18 @@
+# .dotignore - Configurations and files ignored by dots
+# Standard glob patterns supported (e.g. *.md, temp/, !keep.md)
+
 .git
+.git*
+.github
+.dotignore
+README*
+LICENSE*
+LICENCE*
+Makefile
+justfile
+dots
+dots.toml
 .gitignore
 README.md
-
 backup.sh
 setup.sh
-
-fish/fish_variables*
