@@ -21,8 +21,10 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 19))
+;; (setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18 :weight 'regular)
+;; doom-variable-pitch-font (font-spec :family "Fira Sans" :size 19))
+(setq doom-font (font-spec :family "JetBrains Mono Nerd Font" :size 16 :weight 'regular)
+  doom-variable-pitch-font (font-spec :family "JetBrains Mono Nerd Font" :size 17))
 
 (custom-theme-set-faces!
   'doom-one
@@ -47,7 +49,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
-(setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-nord)
 ;; (setq doom-theme 'doom-gruvbox)
 ;; (setq doom-theme 'doom-nord)
 ;; Specify both a dark and light theme, like so and Doom will choose which one
@@ -105,7 +108,7 @@
 (setq-default explicit-shell-file-name (executable-find "fish"))
 
 (map! :leader
-      :desc "Comment line" "-" #'comment-line)
+  :desc "Comment line" "-" #'comment-line)
 
 (setq confirm-kill-emacs nil)
 (setq initial-buffer-choice t)
@@ -123,4 +126,4 @@
 
 ;; visual navigation through wrapped lines
 (map! :nv "j" #'evil-next-visual-line
-      :nv "k" #'evil-previous-visual-line)
+  :nv "k" #'evil-previous-visual-line)
