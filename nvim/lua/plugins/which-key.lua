@@ -3,17 +3,11 @@ return {
     "folke/which-key.nvim",
     opts = {
       preset = "classic",
-      win = {
-        border = "none",
-        noautocmd = true,
-        padding = { 0, 2 },
-        wo = {
-          winhighlight = "NormalFloat:Normal,FloatBorder:Normal",
-        },
+      dependencies = {
+        "echasnovski/mini.icons",
       },
-      layout = {
-        align = "left",
-      },
+      -- Delay before showing the popup. Can be a number or a function that returns a number.
+      delay = 500,
       spec = {
         {
           mode = { "n", "v" },
@@ -36,6 +30,10 @@ return {
         { "<leader>L", hidden = true },
         { "<leader>/", hidden = true },
         { "<leader><space>", hidden = true },
+        -- Overseer entry with icon
+        { "<leader>o", group = "overseer", icon = { icon = "", color = "cyan" } },
+        -- Zettelkasten Vault with icon
+        { "<leader>v", group = "vault", icon = { icon = "", color = "azure" } },
       },
     },
   },
