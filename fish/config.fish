@@ -35,3 +35,7 @@ set -gx GPG_TTY (tty)
 # Refresh gpg-agent tty info on new shell sessions
 gpg-connect-agent updatesstartuptty /bye >/dev/null
 mise activate fish | source
+
+# Set neovim as the default editor
+set -gx EDITOR nvim
+set -gx VISUAL nvim
