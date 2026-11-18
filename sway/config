@@ -1,3 +1,7 @@
+# Start cliphist daemon on sway startup
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -220,24 +224,34 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    id 1
     position top
+    mode hide
+    strip_workspace_numbers yes
+    font JetBrainsMono Nerd Font Normal Regular 11
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while date +'%Y-%m-%d %H:%M'; do sleep 1; done
 
     colors {
         statusline #ffffff
         background #2e3440
         inactive_workspace #4c566a #4c566a #e5e9f0
-        focused_workspace #3b4252 #3b4252 #88c0d0 
-        urgent_workspace #3b4252 #bf616a #3b4252
+        focused_workspace #88c0d0 #88c0d0 #3b4252 
+        urgent_workspace #bf616a #bf616a #3b4252
     }
 }
 
 # Applications shortcuts
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+Shift+n exec nvim
+
+# Open fuzzel with clipboard history
+bindsym $mod+Shift+v exec cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy
+
+# Add a shortcut for sleeping(suspending) the system
+bindsym $mod+Shift+s exec systemctl suspend
 
 # Remove title bars in applications
 default_border none

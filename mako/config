@@ -1,0 +1,10 @@
+text-color=#d8dee9ff
+border-color=#81a1c1ff
+progress-color=over #a3be8cff
+background-color=#2e3440ff
+margin=10
+border-radius=5
+outer-margin=30,0
+padding=5,15
+# font=SF Pro Display 11
+on-touch=invoke-default-action

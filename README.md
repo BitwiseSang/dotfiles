@@ -1,21 +1,16 @@
 # Dotfiles
 
-Personal configuration files for Linux terminal workflows, tuned for performance and accessibility.
+Personal configuration files for Linux tools.
 
-## Components
-
-- **`nvim/`**: Neovim configuration based on LazyVim. Includes LSP support, debugging (DAP), testing (Neotest for Vitest, RSpec, pytest), symbol outlines (Aerial), git diffs (Diffview), and system clipboard integration.
-- **`tmux/`**: Tmux configuration with Catppuccin Mocha theme, true color and undercurl support, and seamless `Ctrl+h/j/k/l` pane navigation shared with Neovim.
-- **`kitty/`**: Kitty terminal configuration with Fira Code and Nerd Font glyph mapping.
-- **`ghostty/`**: Ghostty terminal configuration.
-- **`fish/`**: Fish shell configuration integrated with hydro, mise, fnm, and zoxide.
-- **`clang-format/`**: Formatting rules for C and C++.
-- **`aria2/`**: Configuration for the aria2 download utility.
+> Use at your own risk!
+> Don't use blindly, check first if it aligns with what you want.
 
 ## Helper Scripts
 
-- **`setup.sh`**: Creates symbolic links from this repository to your home directory, backing up any existing files first.
-- **`backup.sh`**: Copies active local configurations into this repository, creates a timestamped git commit, and pushes to remote.
+- **`setup.sh`**: Creates symbolic links from this repository to your home
+  directory, backing up any existing files first.
+- **`backup.sh`**: Copies active local configurations into this repository,
+  creates a timestamped git commit, and pushes to remote.
 
 ## Installation
 
@@ -26,6 +21,9 @@ git clone git@github.com:BitwiseSang/dotfiles.git
 cd dotfiles
 chmod +x setup.sh && ./setup.sh
 ```
+
+> The `backup.sh` scripts backs up your existing configurations first, so you
+> can use it to test the configurations first.
 
 ## Backing Up Changes
 
